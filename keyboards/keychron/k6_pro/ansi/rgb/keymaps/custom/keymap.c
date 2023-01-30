@@ -74,6 +74,14 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
             // Do not force the mod-tap key press to be handled as a modifier
             // if any other key was pressed while the mod-tap key is held down.
             return true;
+        case CTL_T(KC_Z):
+            // Do not force the mod-tap key press to be handled as a modifier
+            // if any other key was pressed while the mod-tap key is held down.
+            return true;
+        case CTL_T(KC_LEFT):
+            // Do not force the mod-tap key press to be handled as a modifier
+            // if any other key was pressed while the mod-tap key is held down.
+            return true;
         default:
             // Force the mod-tap key press to be handled as a modifier if any
             // other key was pressed while the mod-tap key is held down.
@@ -81,20 +89,29 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-const uint16_t PROGMEM test_combo1[] = {KC_K, KC_L, COMBO_END};
-const uint16_t PROGMEM test_combo2[] = {KC_D, KC_V, COMBO_END};
-const uint16_t PROGMEM test_combo3[] = {SFT_T(KC_F), KC_D, COMBO_END};
-const uint16_t PROGMEM test_combo4[] = {SFT_T(KC_J), KC_L, COMBO_END};
-const uint16_t PROGMEM test_combo5[] = {KC_U, KC_I, COMBO_END};
-const uint16_t PROGMEM test_combo6[] = {KC_I, KC_O, COMBO_END};
-const uint16_t PROGMEM test_combo7[] = {KC_S, KC_D, COMBO_END};
-const uint16_t PROGMEM test_combo8[] = {KC_BSLS, KC_DELETE, COMBO_END};
-const uint16_t PROGMEM test_combo9[] = {SFT_T(KC_J), KC_K, COMBO_END};
-const uint16_t PROGMEM test_combo10[] = {KC_Z, KC_X, COMBO_END};
-const uint16_t PROGMEM test_combo11[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM test_combo12[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM test_combo13[] = {KC_W, SFT_T(KC_F), COMBO_END};
-const uint16_t PROGMEM test_combo14[] = {KC_S, SFT_T(KC_F), COMBO_END};
+const uint16_t PROGMEM test_combo1[] = {KC_K, KC_L, COMBO_END}; // K + L = Single Quote
+const uint16_t PROGMEM test_combo2[] = {KC_D, KC_V, COMBO_END}; // D + V = Enter
+const uint16_t PROGMEM test_combo3[] = {SFT_T(KC_F), KC_D, COMBO_END};  // F + D = Delete
+const uint16_t PROGMEM test_combo4[] = {SFT_T(KC_J), KC_L, COMBO_END};  // J + L = Double Quote
+const uint16_t PROGMEM test_combo5[] = {KC_U, KC_I, COMBO_END};  // U + I = Underscore
+const uint16_t PROGMEM test_combo6[] = {KC_I, KC_O, COMBO_END}; // I + O = Minus
+const uint16_t PROGMEM test_combo7[] = {KC_S, KC_D, COMBO_END}; // S + D = Backspace
+const uint16_t PROGMEM test_combo8[] = {KC_BSLS, KC_DELETE, COMBO_END}; // Backslash + Del = PrintScreen
+const uint16_t PROGMEM test_combo9[] = {SFT_T(KC_J), KC_K, COMBO_END}; // K + J = Pipe
+const uint16_t PROGMEM test_combo10[] = {CTL_T(KC_Z), KC_X, COMBO_END}; // K + L = ctrl a
+const uint16_t PROGMEM test_combo11[] = {KC_X, KC_C, COMBO_END}; // K + L = ctrl x
+const uint16_t PROGMEM test_combo12[] = {KC_C, KC_V, COMBO_END}; // K + L = ctrl v
+const uint16_t PROGMEM test_combo13[] = {KC_W, SFT_T(KC_F), COMBO_END}; // W + F = Grave (lang swap) DOES NOT WORK
+const uint16_t PROGMEM test_combo14[] = {KC_S, SFT_T(KC_F), COMBO_END}; // K + L = Ctrl M
+const uint16_t PROGMEM test_combo15[] = {KC_3, KC_4, COMBO_END}; // K + L = alt left 
+const uint16_t PROGMEM test_combo16[] = {KC_F3, KC_F4, COMBO_END}; // K + L = alt left DOES NOT WORK
+const uint16_t PROGMEM test_combo17[] = {KC_4, KC_2, COMBO_END}; // K + L = alt right
+const uint16_t PROGMEM test_combo18[] = {KC_F4, KC_F2, COMBO_END}; // K + L = alt right
+const uint16_t PROGMEM test_combo19[] = {KC_8, KC_9, COMBO_END}; // K + L = left (
+const uint16_t PROGMEM test_combo20[] = {KC_9, KC_0, COMBO_END}; // K + L = right )
+const uint16_t PROGMEM test_combo21[] = {KC_BSPC, KC_RBRC, COMBO_END}; // K + L = Delete
+const uint16_t PROGMEM test_combo22[] = {KC_W, KC_Q, COMBO_END}; // K + L = Home
+const uint16_t PROGMEM test_combo23[] = {KC_Q, KC_S, COMBO_END}; // K + L = End
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(test_combo1, LSFT(KC_7)),
     COMBO(test_combo2, KC_ENTER), // keycodes with modifiers are possible too!
@@ -109,7 +126,16 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(test_combo11, LCTL(KC_X)),
     COMBO(test_combo12, LCTL(KC_V)),
     COMBO(test_combo13, KC_GRV),
-    COMBO(test_combo14, LCTL(KC_M))
+    COMBO(test_combo14, LCTL(KC_M)),
+    COMBO(test_combo15, LALT(KC_LEFT)),
+    COMBO(test_combo16, LALT(KC_LEFT)),
+    COMBO(test_combo17, LALT(KC_RIGHT)),
+    COMBO(test_combo18, LALT(KC_RIGHT)),
+    COMBO(test_combo19, LSFT(KC_8)),
+    COMBO(test_combo20, LSFT(KC_9)),
+    COMBO(test_combo21, KC_DELETE),
+    COMBO(test_combo22, KC_HOME),
+    COMBO(test_combo23, KC_END)
 };
 
 //void pointing_device_init_user(void) {
@@ -120,18 +146,18 @@ combo_t key_combos[COMBO_COUNT] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [MAC_BASE] = LAYOUT_ansi_68(
-     KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSLS, RGB_MOD,
+     KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSLS, KC_DELETE,
      KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSPC, KC_HOME,
-     KC_CAPS,  KC_A,     KC_S,     KC_D,     SFT_T(KC_F),     KC_G,     KC_H,     SFT_T(KC_J),     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,  KC_END,
-     KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  MT(MOD_RSFT,KC_INT1),  KC_UP,    KC_PGDN,
-     KC_LCTL,  KC_LGUI, KC_LALT,                               LT(WIN_BASE,KC_SPC),                       KC_RALT,MO(FN2),KC_RCTL, KC_LEFT,  KC_DOWN, KC_RGHT),
+     CTL_T(KC_GRV),  KC_A,     KC_S,     KC_D,     SFT_T(KC_F),     KC_G,     KC_H,     SFT_T(KC_J),     KC_K,     KC_L,     CTL_T(KC_SCLN),  KC_QUOT,            KC_ENT,  KC_END,
+     OSM(MOD_LSFT),  CTL_T(KC_Z),     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  MT(MOD_RSFT,KC_INT1),  KC_UP,    KC_PGDN,
+     TG(1),  KC_LGUI, KC_LALT,                               LT(WIN_BASE,KC_SPC),                       KC_RALT,MO(FN2),KC_RCTL, KC_LEFT,  KC_DOWN, KC_RGHT),
 
 [WIN_BASE] = LAYOUT_ansi_68(
      KC_TRNS,  MACRO00,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_TRNS,  KC_TRNS,
-     C(S(KC_TAB)),  C(KC_TAB),  KC_MS_BTN2,  KC_MS_UP,  KC_MS_BTN1,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  C(KC_BSPC),  KC_PGUP,
-     KC_TRNS,  KC_TRNS,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_PGDN,
-     KC_TRNS,  C(KC_Z),  C(KC_X),  KC_MS_WH_DOWN,  KC_MS_WH_UP,  BAT_LVL,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-     KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+     C(S(KC_TAB)),  C(KC_TAB),  KC_MS_BTN2,  KC_MS_UP,  KC_MS_BTN1,  KC_MS_WH_UP,  KC_TRNS,  KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  MACRO02,  MACRO01,  C(KC_BSPC),  KC_PGUP,
+     KC_TRNS,  KC_TRNS,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT,  KC_MS_WH_DOWN,  KC_TRNS,  KC_KP_4,  KC_KP_5,  KC_KP_6,  KC_KP_PLUS,  KC_KP_ASTERISK,            KC_TRNS,  KC_PGDN,
+     KC_TRNS,  CTL_T(KC_LEFT),  KC_DOWN,  KC_UP,  KC_RIGHT,  KC_TRNS,  KC_KP_0,  KC_KP_1,  KC_KP_2,  KC_KP_3,  KC_KP_DOT,  KC_MS_BTN1,  KC_MS_UP,  KC_MS_BTN2,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                      KC_TRNS,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT),
 
 [MAC_FN1] = LAYOUT_ansi_68(
      KC_GRV,   KC_BRID,  KC_BRIU,  KC_MCTL,  KC_LNPD,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,  RGB_TOG,
