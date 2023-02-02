@@ -64,7 +64,7 @@
 /* EEPROM Driver Configuration */
 #define WEAR_LEVELING_LOGICAL_SIZE 2048
 #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2)
-#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+// #define DYNAMIC_KEYMAP_LAYER_COUNT 5
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
