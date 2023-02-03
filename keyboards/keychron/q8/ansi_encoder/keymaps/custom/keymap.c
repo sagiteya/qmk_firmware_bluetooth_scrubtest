@@ -131,14 +131,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_F1,    KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11,   KC_F12,   _______,          _______,
         C(S(KC_TAB)), C(KC_TAB),    KC_F2,    KC_F3,   KC_F4,   KC_F5,  KC_NUM_LOCK,  KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  KC_PGUP,  _______,  _______,          _______,
         _______,  KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, KC_KP_4,  KC_KP_5,  KC_KP_6,  KC_KP_PLUS, _______,  KC_PGDN,          _______,
-        _______,           C(KC_Z),  C(KC_X), C(KC_C), C(KC_V), KC_F12,  _______, KC_KP_0,  KC_KP_1,  KC_KP_2,  KC_KP_3,  KC_KP_DOT,  _______, _______,
+        _______,           C(KC_Z),  C(KC_X), C(KC_C), C(KC_V), KC_F12,   _______, KC_KP_0,  KC_KP_1,  KC_KP_2,  KC_KP_3,  KC_KP_DOT,  _______, _______,
         _______, KC_LALT,  _______,           _______,          _______,  _______,          _______,           _______,            _______, _______, _______),
 
     [_7] = LAYOUT_ansi_69(
         _______, KC_F1,    KC_F2,    KC_F3,   KC_F4,   KC_F5,   KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11,   KC_F12,   _______,          _______,
-        _______, _______,  KC_MS_BTN2,  KC_MS_UP, KC_MS_BTN1, KC_MS_WH_UP, _______,  KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2, _______,  _______,  _______,  _______,          _______,
-        _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_MS_WH_DOWN,           _______, KC_MS_LEFT, KC_MS_RIGHT, KC_MS_BTN3,  _______,  _______,  _______,          _______,
-        _______,           _______,  _______, _______, _______, _______,  _______, _______, KC_MS_DOWN, KC_MS_WH_UP,  KC_MS_WH_DOWN,  _______,  _______, _______,
+        _______, _______,  KC_MS_WH_UP, KC_MS_BTN2,  KC_MS_UP, KC_MS_BTN1,   KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2,_______, _______,  _______,  _______,  _______,          _______,
+        _______, _______,KC_MS_WH_DOWN, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT,           KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______,   _______,  _______,  _______,          _______,
+        _______,           _______,  _______, _______, KC_MS_WH_UP, KC_MS_WH_DOWN,  _______, KC_MS_WH_UP, KC_MS_WH_DOWN,   _______,  _______,  _______, _______, _______,
         _______, _______,  _______,           _______,          _______,  _______,          _______,           _______,            _______, _______, _______),
 
     [_8] = LAYOUT_ansi_69(
