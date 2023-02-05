@@ -50,7 +50,9 @@ enum tap_dance_codes {
   CT_C_COPY,
   CT_V_PASTE,
   CT_B_UNDER,
-  CT_I_BACK
+  CT_I_BACK,
+  CT_M_UNDER,
+  CT_N_PIPE,
 };
 
 
@@ -58,7 +60,7 @@ enum tap_dance_codes {
 bool is_alt_tab_active = false; // ADD this near the beginning of keymap.c
 uint16_t alt_tab_timer = 0;     // we will be using them soon.
 
-
+uint8_t mod_state;
 
 typedef struct {
     uint16_t tap;
@@ -126,6 +128,70 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;    
   
   return true;
+
+    case LT(WIN_BASE,KC_SPC):
+      // Detect the activation of only Left Alt
+        if ((get_mods() & MOD_BIT(KC_LCTL)) == MOD_BIT(KC_LCTL)) {
+            if (record->event.pressed) {
+                // No need to register KC_LALT because it's already active.
+                // The Alt modifier will apply on this KC_TAB.
+                register_code(KC_BSPC);
+            } else {
+                unregister_code(KC_BSPC);
+            }
+            // Do not let QMK process the keycode further
+            return false;
+        }
+        // Else, let QMK process the KC_ESC keycode as usual
+        return true;
+
+  case KC_0:
+      // Detect the activation of only Left Alt
+        if ((get_mods() & MOD_BIT(KC_LSFT)) == MOD_BIT(KC_LSFT)) {
+            if (record->event.pressed) {
+                // No need to register KC_LALT because it's already active.
+                // The Alt modifier will apply on this KC_TAB.
+                register_code(KC_9);
+            } else {
+                unregister_code(KC_9);
+            }
+            // Do not let QMK process the keycode further
+            return false;
+        }
+        // Else, let QMK process the KC_ESC keycode as usual
+        return true;
+
+     case KC_9:
+     // Detect the activation of only Left Alt
+        if ((get_mods() & MOD_BIT(KC_LSFT)) == MOD_BIT(KC_LSFT)) {
+            if (record->event.pressed) {
+                // No need to register KC_LALT because it's already active.
+                // The Alt modifier will apply on this KC_TAB.
+                register_code(KC_8);
+            } else {
+                unregister_code(KC_8);
+            }
+            // Do not let QMK process the keycode further
+            return false;
+        }
+        // Else, let QMK process the KC_ESC keycode as usual
+        return true;
+
+     case KC_8:
+     // Detect the activation of only Left Alt
+        if ((get_mods() & MOD_BIT(KC_LSFT)) == MOD_BIT(KC_LSFT)) {
+            if (record->event.pressed) {
+                // No need to register KC_LALT because it's already active.
+                // The Alt modifier will apply on this KC_TAB.
+                register_code(KC_QUOT);
+            } else {
+                unregister_code(KC_QUOT);
+            }
+            // Do not let QMK process the keycode further
+            return false;
+        }
+        // Else, let QMK process the KC_ESC keycode as usual
+        return true;
 
   qk_tap_dance_action_t *action;
 
@@ -199,6 +265,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_code16(tap_hold->tap);
         }       
         break;
+    case TD(CT_M_UNDER):  // list all tap dance keycodes with tap-hold configurations
+          action = &tap_dance_actions[TD_INDEX(keycode)];
+          if (!record->event.pressed && action->state.count && !action->state.finished) {
+              tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
+              tap_code16(tap_hold->tap);
+          }
+          break;
+    case TD(CT_N_PIPE):  // list all tap dance keycodes with tap-hold configurations
+          action = &tap_dance_actions[TD_INDEX(keycode)];
+          if (!record->event.pressed && action->state.count && !action->state.finished) {
+              tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
+              tap_code16(tap_hold->tap);
+          }
+          break;
   };
   return true;
 }
@@ -255,6 +335,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [CT_C_COPY] = ACTION_TAP_DANCE_TAP_HOLD(KC_C, C(KC_C)),
     [CT_V_PASTE] = ACTION_TAP_DANCE_TAP_HOLD(KC_V, C(KC_V)),
     [CT_I_BACK] = ACTION_TAP_DANCE_TAP_HOLD(KC_I, S(KC_2)),
+    [CT_M_UNDER] = ACTION_TAP_DANCE_TAP_HOLD(KC_M, S(KC_INT1)),
+    [CT_N_PIPE] = ACTION_TAP_DANCE_TAP_HOLD(KC_N, S(KC_INT3)),
 
 };
 
@@ -312,13 +394,13 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
 
 const uint16_t PROGMEM test_combo1[] = {SFT_T(KC_F), SFT_T(KC_J), COMBO_END}; // F + J = Single Quote
 //const uint16_t PROGMEM test_combo2[] = {KC_D, KC_C, COMBO_END}; // D + C = Enter
-const uint16_t PROGMEM test_combo3[] = {SFT_T(KC_F), KC_V, COMBO_END};  // D + S = Delete
+const uint16_t PROGMEM test_combo3[] = {SFT_T(KC_F), TD(CT_V_PASTE), COMBO_END};  // D + S = Delete
 const uint16_t PROGMEM test_combo4[] = {KC_M, KC_COMM, COMBO_END};  // J + L = Double Quote
 const uint16_t PROGMEM test_combo5[] = {KC_B, KC_H, COMBO_END};  // I + J = Underscore
 // const uint16_t PROGMEM test_combo6[] = {KC_O,SFT_T(KC_J), COMBO_END}; // O + J = Minus
 const uint16_t PROGMEM test_combo7[] = {KC_X, KC_C, COMBO_END}; // q + w = Backspace
 // const uint16_t PROGMEM test_combo8[] = {KC_LBRC, KC_BSLS, COMBO_END}; // Backslash + Del = PrintScreen
-const uint16_t PROGMEM test_combo9[] = {KC_K, SFT_T(KC_J), COMBO_END}; // K + J = Pipe
+const uint16_t PROGMEM test_combo9[] = {TD(CT_K_APOS), SFT_T(KC_J), COMBO_END}; // K + J = Pipe
 //const uint16_t PROGMEM test_combo10[] = {LT(FN5,KC_L), KC_K, COMBO_END}; // F + D = Left
 //const uint16_t PROGMEM test_combo11[] = {KC_X, KC_C, COMBO_END}; // X + C = Tab
 //const uint16_t PROGMEM test_combo12[] = {KC_X, KC_V, COMBO_END}; // X + V = Shift Tab
@@ -381,7 +463,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_LBRC, KC_HOME,
      KC_TAB,   TD(CT_Q_HOME),     TD(CT_W_END),     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     TD(CT_I_BACK),     KC_O,     KC_P,     TD(CT_LBRC_HOME),  TD(CT_RBRC_END),  KC_BSPC, KC_DEL,
      CTL_T(KC_GRV),  LT(FN3,KC_A),     KC_S,     KC_D,     SFT_T(KC_F),     KC_G,     KC_H,     SFT_T(KC_J),    TD(CT_K_APOS),     LT(FN5,KC_L),     CTL_T(KC_SCLN),  KC_QUOT,            LT(FN2,KC_ENT),  KC_END,
-     MT(MOD_LSFT,KC_BSPC),  CTL_T(KC_Z),     TD(CT_X_CUT),     TD(CT_C_COPY),     TD(CT_V_PASTE),    TD(CT_B_UNDER),     KC_N,     KC_M,     KC_COMM,  KC_DOT,   SFT_T(KC_SLSH),  MT(MOD_RSFT,KC_INT1),  KC_UP,    KC_PGDN,
+     MT(MOD_LSFT,KC_BSPC),  CTL_T(KC_Z),     TD(CT_X_CUT),     TD(CT_C_COPY),     TD(CT_V_PASTE),    TD(CT_B_UNDER),     TD(CT_N_PIPE),    TD(CT_M_UNDER),     KC_COMM,  KC_DOT,   SFT_T(KC_SLSH),  MT(MOD_RSFT,KC_INT1),  KC_UP,    KC_PGDN,
      TG(MAC_FN1),  KC_LGUI, KC_LALT,                               LT(WIN_BASE,KC_SPC),                       KC_RALT,MO(FN2),KC_RCTL, KC_LEFT,  KC_DOWN, KC_RGHT),
 
 [WIN_BASE] = LAYOUT_ansi_68(
