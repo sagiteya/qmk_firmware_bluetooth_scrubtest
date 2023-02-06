@@ -101,16 +101,13 @@
 /* Set LED driver current */
 #    define CKLED2001_CURRENT_TUNE   {0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38, 0x38}
 #    define MOUSEKEY_INERTIA
-#    define MOUSEKEY_FRICTION 24
+#    define MOUSEKEY_FRICTION 20
 #    define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
-#    define COMBO_COUNT 14
+#    define COMBO_COUNT 28
 //#    define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 //#    define AUTO_MOUSE_DEFAULT_LAYER WIN_BASE
 #    define TAPPING_TOGGLE 2
 #    define ONESHOT_TAP_TOGGLE 2
 //#    define COMBO_MUST_PRESS_IN_ORDER
 #    define COMBO_TERM 80
-#    define TAPPING_TERM 165
-#    define TAPPING_TERM_PER_KEY
-
 #endif
