@@ -553,8 +553,8 @@ const uint16_t PROGMEM test_combo7[] = {TD(CT_K_APOS), LT(FN5,KC_L), COMBO_END};
 // const uint16_t PROGMEM test_combo8[] = {KC_LBRC, KC_BSLS, COMBO_END}; // Backslash + Del = PrintScreen
 const uint16_t PROGMEM test_combo9[] = {TD(CT_F11), TD(CT_F12), COMBO_END}; // K + J = Pipe
 //const uint16_t PROGMEM test_combo10[] = {LT(FN5,KC_L), KC_K, COMBO_END}; // F + D = Left
-const uint16_t PROGMEM test_combo11[] = {TD(CT_I_BACK), TD(CT_O_TILD), TD(CT_P_MIN), COMBO_END}; // X + C = Tab
-const uint16_t PROGMEM test_combo12[] = {KC_KP_8,  KC_KP_9,  KC_KP_MINUS, COMBO_END}; // X + V = Shift Tab
+const uint16_t PROGMEM test_combo11[] = { TD(CT_U_AST),TD(CT_I_BACK), TD(CT_O_TILD), COMBO_END}; // X + C = Tab
+const uint16_t PROGMEM test_combo12[] = {KC_KP_8,  KC_KP_9,  KC_KP_7, COMBO_END}; // X + V = Shift Tab
 //const uint16_t PROGMEM test_combo13[] = {KC_W, SFT_T(KC_F), COMBO_END}; // W + F = Grave (lang swap)
 //const uint16_t PROGMEM test_combo14[] = {KC_S, SFT_T(KC_F), COMBO_END}; // S + F = Ctrl M
 //const uint16_t PROGMEM test_combo15[] = {KC_3, KC_4, COMBO_END}; // 3 + 4 = alt left 
@@ -621,10 +621,17 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
             return TAPPING_TERM + 50;
         case TD(CT_D_SRG):
             //return 130;
+<<<<<<< Updated upstream
             return TAPPING_TERM + 50;  
         case TD(CT_A_ALL):
             //return 130;
             return TAPPING_TERM + 75;  
+=======
+            return TAPPING_TERM + 50; 
+        case TD(CT_A_ALL):
+            //return 130;
+            return TAPPING_TERM + 100;    
+>>>>>>> Stashed changes
         default:
             return TAPPING_TERM;
     }
@@ -641,14 +648,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [WIN_BASE] = LAYOUT_ansi_68(
      GRABURL,  REFRESH,    KC_F2,    A(KC_LEFT),    A(KC_RIGHT),    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_PRINT_SCREEN,  KC_PGUP,
+<<<<<<< Updated upstream
      S(C(KC_TAB)), C(KC_TAB),  KC_MS_BTN2, KC_MS_UP,  KC_MS_BTN1,    KC_MS_WH_UP,  KC_NUM,  KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  LSFT(KC_8),  LSFT(KC_9),  C(KC_BSPC),  C(KC_DEL),
+=======
+     S(C(KC_TAB)), C(KC_TAB),   KC_MS_BTN2, KC_MS_UP,  KC_MS_BTN1,    KC_MS_WH_UP,  KC_NUM,  KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  LSFT(KC_8),  LSFT(KC_9),  C(KC_BSPC),  C(KC_DEL),
+>>>>>>> Stashed changes
      KC_TRNS, C(KC_A), KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT,  KC_MS_WH_DOWN,  KC_BSPC,  KC_KP_4,  KC_KP_5,  KC_KP_6,  S(KC_7),  S(KC_2),            KC_TRNS,  KC_PGDN,
      MT(MOD_LSFT,KC_MS_BTN2), CTL_T(KC_LEFT),  KC_DOWN,  KC_UP,  KC_RIGHT,  KC_TRNS,  KC_KP_0,  KC_KP_1,  KC_KP_2,  KC_KP_3,  KC_KP_DOT,  KC_MS_BTN1,  KC_MS_UP,  KC_MS_BTN2,
      QK_CAPS_WORD_TOGGLE,  KC_ENTER,  KC_TRNS,                                KC_TRNS,                      KC_TRNS,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT),
 
 [MAC_FN1] = LAYOUT_ansi_68(
      GRABURL,   REFRESH,  BOOKMARK1,  BOOKMARK2,  BOOKMARK3,  BOOKMARK4,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  RGB_TOG,
+<<<<<<< Updated upstream
      S(C(KC_TAB)), C(KC_TAB),  KC_MS_UP,  KC_MS_BTN1,  A(KC_LEFT),  KC_F5,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  QK_DYNAMIC_TAPPING_TERM_PRINT,  QK_DYNAMIC_TAPPING_TERM_UP,  QK_DYNAMIC_TAPPING_TERM_DOWN,  KC_TRNS,  KC_TRNS,
+=======
+     S(C(KC_TAB)), C(KC_TAB),    KC_MS_UP,  KC_MS_BTN1,  A(KC_LEFT),  KC_F5,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  QK_DYNAMIC_TAPPING_TERM_PRINT,  QK_DYNAMIC_TAPPING_TERM_UP,  QK_DYNAMIC_TAPPING_TERM_DOWN,  KC_TRNS,  KC_TRNS,
+>>>>>>> Stashed changes
      KC_TRNS,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT,  A(KC_RGHT),  KC_MS_BTN1,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,
      MT(MOD_LSFT,KC_MS_BTN2), CTL_T(KC_LEFT),  KC_DOWN,  KC_UP,  KC_RIGHT, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_MS_WH_UP,  KC_MS_WH_DOWN,                                KC_MS_BTN1,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
@@ -668,10 +683,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 [FN3] = LAYOUT_ansi_68(
      KC_TRNS,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_TRNS,  KC_TRNS,
-     KC_TRNS,  KC_TRNS,  KC_HOME,  MT(MOD_LCTL,KC_UP),  KC_END,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-     KC_TRNS,  KC_TRNS,  MT(MOD_LSFT,KC_LEFT),  MT(MOD_LCTL,KC_DOWN),  MT(MOD_LSFT,KC_RIGHT),  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,
-     KC_TRNS,  KC_TRNS,  C(KC_X),  C(KC_C),  C(KC_V),  BAT_LVL,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
-     KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_TRNS,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_NUM,  KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  KC_KP_EQUAL,  KC_TRNS,   KC_TRNS,  KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_BSPC,  KC_KP_4,  KC_KP_5,  KC_KP_6, KC_KP_PLUS, KC_KC_ASTERISK,             KC_TRNS,  KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  BAT_LVL,  KC_TRNS,  KC_KP_1,  KC_KP_2,  KC_KP_3,  KC_KP_DOT,   SFT_T(KC_KP_SLASH),  KC_TRNS,  KC_TRNS,
+     KC_TRNS,  KC_TRNS,  KC_TRNS,                                KC_KP_0,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
 [FN4] = LAYOUT_ansi_68(
      KC_TRNS,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,
