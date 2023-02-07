@@ -615,13 +615,16 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TD(CT_K_APOS):
 //          return TAPPING_TERM + 1250;
-            return TAPPING_TERM - 75;
+            return TAPPING_TERM - 25;
         case TD(CT_S_SLF):
             //return 130;
             return TAPPING_TERM + 50;
         case TD(CT_D_SRG):
             //return 130;
-            return TAPPING_TERM + 50;    
+            return TAPPING_TERM + 50;  
+        case TD(CT_A_ALL):
+            //return 130;
+            return TAPPING_TERM + 75;  
         default:
             return TAPPING_TERM;
     }
@@ -638,14 +641,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [WIN_BASE] = LAYOUT_ansi_68(
      GRABURL,  REFRESH,    KC_F2,    A(KC_LEFT),    A(KC_RIGHT),    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_PRINT_SCREEN,  KC_PGUP,
-     C(KC_TAB), S(C(KC_TAB)),  KC_MS_BTN2, KC_MS_UP,  KC_MS_BTN1,    KC_MS_WH_UP,  KC_NUM,  KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  LSFT(KC_8),  LSFT(KC_9),  C(KC_BSPC),  C(KC_DEL),
+     S(C(KC_TAB)), C(KC_TAB),  KC_MS_BTN2, KC_MS_UP,  KC_MS_BTN1,    KC_MS_WH_UP,  KC_NUM,  KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  LSFT(KC_8),  LSFT(KC_9),  C(KC_BSPC),  C(KC_DEL),
      KC_TRNS, C(KC_A), KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT,  KC_MS_WH_DOWN,  KC_BSPC,  KC_KP_4,  KC_KP_5,  KC_KP_6,  S(KC_7),  S(KC_2),            KC_TRNS,  KC_PGDN,
      MT(MOD_LSFT,KC_MS_BTN2), CTL_T(KC_LEFT),  KC_DOWN,  KC_UP,  KC_RIGHT,  KC_TRNS,  KC_KP_0,  KC_KP_1,  KC_KP_2,  KC_KP_3,  KC_KP_DOT,  KC_MS_BTN1,  KC_MS_UP,  KC_MS_BTN2,
      QK_CAPS_WORD_TOGGLE,  KC_ENTER,  KC_TRNS,                                KC_TRNS,                      KC_TRNS,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT),
 
 [MAC_FN1] = LAYOUT_ansi_68(
      GRABURL,   REFRESH,  BOOKMARK1,  BOOKMARK2,  BOOKMARK3,  BOOKMARK4,   KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  RGB_TOG,
-     C(KC_TAB),  S(C(KC_TAB)),  KC_MS_UP,  KC_MS_BTN1,  A(KC_LEFT),  KC_F5,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  QK_DYNAMIC_TAPPING_TERM_PRINT,  QK_DYNAMIC_TAPPING_TERM_UP,  QK_DYNAMIC_TAPPING_TERM_DOWN,  KC_TRNS,  KC_TRNS,
+     S(C(KC_TAB)), C(KC_TAB),  KC_MS_UP,  KC_MS_BTN1,  A(KC_LEFT),  KC_F5,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  QK_DYNAMIC_TAPPING_TERM_PRINT,  QK_DYNAMIC_TAPPING_TERM_UP,  QK_DYNAMIC_TAPPING_TERM_DOWN,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT,  A(KC_RGHT),  KC_MS_BTN1,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,  KC_TRNS,
      MT(MOD_LSFT,KC_MS_BTN2), CTL_T(KC_LEFT),  KC_DOWN,  KC_UP,  KC_RIGHT, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,
      KC_TRNS,  KC_MS_WH_UP,  KC_MS_WH_DOWN,                                KC_MS_BTN1,                      KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS),
