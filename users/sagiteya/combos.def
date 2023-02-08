@@ -1,0 +1,12 @@
+// COMBOS
+//   name      result           chord keys
+
+COMB(numtoggle, TG(_NUM),      KC_U, KC_I, KC_O)
+SUBS(leftparen,               SS_LSFT("8"),        SG_8,  SG_9)
+SUBS(rightparen,              SS_LSFT("9"),        SG_9,  SG_0)
+COMB(fv_enter,                KC_ENT,          SG_F,  SG_V)
+COMB(jn_enter,                KC_ENT,          SG_J,  KC_N)
+SUBS(apostromash,             SS_LSFT("7"),      SG_7,  SG_8)
+COMB(langswap,                KC_GRV,          SG_F,  SG_W)
+COMB(weresc,                  KC_ESC,          SG_W, KC_E, KC_R)
+

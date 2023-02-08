@@ -1,0 +1,12 @@
+SRC += sagiteya.c
+VPATH  +=  keyboards/gboards/
+
+MOUSEKEY_ENABLE = yes       # Mouse keys
+UNICODEMAP_ENABLE = no
+COMBO_ENABLE = yes
+TAP_DANCE_ENABLE = yes
+KEY_OVERRIDE_ENABLE = yes
+LEADER_ENABLE = yes
+DYNAMIC_TAPPING_TERM_ENABLE = yes
+CAPS_WORD_ENABLE = yes
+ENCODER_MAP_ENABLE = yes

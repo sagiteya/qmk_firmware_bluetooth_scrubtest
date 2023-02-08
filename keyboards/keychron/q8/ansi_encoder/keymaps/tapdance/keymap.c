@@ -296,7 +296,7 @@ combo_t key_combos[COMBO_COUNT] = {
 #define KC_FLXP LGUI(KC_E)
 
 #define X_CAT TD(CT_X_CUT)
-#define C_COP TD(CT_C_COPY)
+ TD(CT_C_COPY)
 #define V_PAS TD(CT_V_PASTE)
 #define LB_END TD(CT_RBRC_END)
 #define AT_HOM TD(CT_LBRC_HOME)
