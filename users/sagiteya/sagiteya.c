@@ -17,11 +17,12 @@
 
 #include QMK_KEYBOARD_H
 #include "sagiteya.h"
-#include "g/keymap_combo.h"
+#include "keymap_combo.h"
+#include "process_keycode/process_tap_dance.h"
 
 
 //Shft+BSPC=DEL
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+//const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
 const key_override_t rparen_key_override = ko_make_basic(MOD_MASK_SHIFT, SG_0, S(KC_9));
 const key_override_t lparen_key_override = ko_make_basic(MOD_MASK_SHIFT, SG_9, S(KC_8));
 const key_override_t eitqut_key_override = ko_make_basic(MOD_MASK_SHIFT, SG_8, S(KC_7));
@@ -32,7 +33,7 @@ const key_override_t ctlsp2_key_override = ko_make_basic(MOD_MASK_CTRL, SG_SPC2,
 
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
-    &delete_key_override,
+//    &delete_key_override,
     &rparen_key_override,
     &lparen_key_override,
     &eitqut_key_override,
@@ -62,6 +63,7 @@ uint32_t layer_state_set_keymap (uint32_t state) {
 __attribute__ ((weak))
 void led_set_keymap(uint8_t usb_led) {}
 
+LEADER_EXTERNS();
 
 void matrix_scan_user(void) {
  LEADER_DICTIONARY() {
@@ -71,29 +73,28 @@ void matrix_scan_user(void) {
     SEQ_ONE_KEY(KC_P) {
       // Anything you can do in a macro.
       register_code(KC_LCTL);
-      register_code(KC_PRINTSCREEN);
-      unregister_code(KC_PRINTSCREEN);
+      register_code(KC_PRINT_SCREEN);
+      unregister_code(KC_PRINT_SCREEN);
       unregister_code(KC_LCTL);
     }
     SEQ_ONE_KEY(KC_SEMICOLON) {
       // Anything you can do in a macro.
      register_code(KC_LALT);
-      register_code(KC_PRINTSCREEN);
-      unregister_code(KC_PRINTSCREEN);
+      register_code(KC_PRINT_SCREEN);
+      unregister_code(KC_PRINT_SCREEN);
       unregister_code(KC_LALT);
     }
-    SEQ_TWO_KEYS(KC_B, KC_A) {
-      register_code(BM_BAHA);
-      unregister_code(BM_BAHA);
+    SEQ_TWO_KEYS(KC_B, Q_A) {
+      register_code16(BM_BAHA);
     }
     SEQ_THREE_KEYS(KC_A, KC_R, KC_D) {
-      register_code(BM_PROHARD);
-      unregister_code(BM_PROHARD);
+      register_code16(BM_PROHARD);
+      
     //  SEND_STRING("https://start.duckduckgo.com\n");
     }
     SEQ_TWO_KEYS(KC_R, KC_O) {
-      register_code(BM_BROD);
-      unregister_code(BM_BROD);
+      register_code16(BM_BROD);
+      
       
     }
   }
@@ -111,6 +112,10 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case TD(CT_D_SRG):
             return TAPPING_TERM + 50;  
         case TD(CT_A_ALL):
+            return TAPPING_TERM + 100;
+        case TD(QD_A):
+            return TAPPING_TERM + 100;
+        case TD(QD_SPC):
             return TAPPING_TERM + 100;    
         default:
             return TAPPING_TERM;
@@ -243,7 +248,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       }
       break;  
-    case BM_PBAHA:
+    case BM_BAHA:
       if (record->event.pressed) {
         SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/301061/1/0/59"SS_TAP(X_ENTER));
       } else {
@@ -571,6 +576,10 @@ qk_tap_dance_action_t *action;
   return true;
 }
 
+//**********************
+//**********************
+//**********************
+
 void tap_dance_tap_hold_finished(qk_tap_dance_state_t *state, void *user_data) {
     tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)user_data;
 
@@ -600,6 +609,213 @@ void tap_dance_tap_hold_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 #define ACTION_TAP_DANCE_TAP_HOLD(tap, hold) \
     { .fn = {NULL, tap_dance_tap_hold_finished, tap_dance_tap_hold_reset}, .user_data = (void *)&((tap_dance_tap_hold_t){tap, hold, 0}), }
+
+
+
+int cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) {
+    //If count = 1, and it has been interrupted - it doesn't matter if it is pressed or not: Send SINGLE_TAP
+    if (state->interrupted) {
+      //     if (!state->pressed) return SINGLE_TAP;
+      //need "permissive hold" here.
+      //     else return SINsGLE_HOLD;
+      //If the interrupting key is released before the tap-dance key, then it is a single HOLD
+      //However, if the tap-dance key is released first, then it is a single TAP
+      //But how to get access to the state of the interrupting key????
+      return SINGLE_TAP;
+    }
+    else {
+      if (!state->pressed) return SINGLE_TAP;
+      else return SINGLE_HOLD;
+    }
+  }
+  //If count = 2, and it has been interrupted - assume that user is trying to type the letter associated
+  //with single tap.
+  else if (state->count == 2) {
+    if (state->interrupted) return DOUBLE_SINGLE_TAP;
+    else if (state->pressed) return DOUBLE_HOLD;
+    else return DOUBLE_TAP;
+  }
+  else if ((state->count == 3) && ((state->interrupted) || (!state->pressed))) return TRIPLE_TAP;
+  else if (state->count == 3) return TRIPLE_HOLD;
+  else if ((state->count == 4) && ((state->interrupted) || (!state->pressed))) return QUADRUPLE_TAP;
+  else if (state->count == 4) return QUADRUPLE_HOLD;
+  else if ((state->count == 5) && ((state->interrupted) || (!state->pressed))) return QUINTUPLE_TAP;
+  else if (state->count == 5) return QUINTUPLE_HOLD;
+  else if ((state->count == 6) && ((state->interrupted) || (!state->pressed))) return SEXTUPLE_TAP;
+  else if (state->count == 6) return SEXTUPLE_HOLD;
+  else if ((state->count == 7) && ((state->interrupted) || (!state->pressed))) return SEPTUPLE_TAP;
+  else if (state->count == 7) return SEPTUPLE_HOLD;
+  else if ((state->count == 8) && ((state->interrupted) || (!state->pressed))) return OCTUPLE_TAP;
+  else if (state->count == 8) return OCTUPLE_HOLD;
+  else return 99; //magic number. At some point this method will expand to work for more presses
+}
+
+//This works well if you want this key to work as a "fast modifier". It favors being held over being tapped.
+int hold_cur_dance (qk_tap_dance_state_t *state) {
+  if (state->count == 1) {
+    if (state->interrupted) {
+      if (!state->pressed) return SINGLE_TAP;
+      else return SINGLE_HOLD;
+    }
+    else {
+      if (!state->pressed) return SINGLE_TAP;
+      else return SINGLE_HOLD;
+    }
+  }
+  //If count = 2, and it has been interrupted - assume that user is trying to type the letter associated
+  //with single tap.
+  else if (state->count == 2) {
+    if (state->pressed) return DOUBLE_HOLD;
+    else return DOUBLE_TAP;
+  }
+  else if (state->count == 3) {
+    if (!state->pressed) return TRIPLE_TAP;
+    else return TRIPLE_HOLD;
+  }
+  else if (state->count == 4) {
+    if (!state->pressed) return QUADRUPLE_TAP;
+    else return QUADRUPLE_HOLD;
+  }
+  else if (state->count == 5) {
+    if (!state->pressed) return QUINTUPLE_TAP;
+    else return QUINTUPLE_HOLD;
+  }
+  else if (state->count == 6) {
+    if (!state->pressed) return SEXTUPLE_TAP;
+    else return SEXTUPLE_HOLD;
+  }
+  else return 8; //magic number. At some point this method will expand to work for more presses
+}
+
+
+//
+///
+///////
+///////////
+
+static xtap atap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+
+void a_finished (qk_tap_dance_state_t *state, void *user_data) {
+  atap_state.state = cur_dance(state);
+  switch (atap_state.state) {
+    case SINGLE_TAP: register_code(KC_A); break;
+    case SINGLE_HOLD: register_code(KC_LALT); break;
+    case DOUBLE_TAP: register_code(KC_A);unregister_code(KC_A);register_code(KC_A); break;
+    case DOUBLE_HOLD: register_code(KC_LCTL);register_code(KC_A);unregister_code(KC_A); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_A);unregister_code(KC_A);register_code(KC_A); break;
+  }    
+}
+
+
+void a_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (atap_state.state) {
+    case SINGLE_TAP: unregister_code(KC_A); break;
+    case SINGLE_HOLD: unregister_code(KC_LALT); break;
+    case DOUBLE_TAP: unregister_code(KC_A);break;
+    case DOUBLE_HOLD: unregister_code(KC_LCTL);break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_A);
+  }
+  atap_state.state = 0;
+}
+
+
+
+static xtap ztap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+
+void z_finished (qk_tap_dance_state_t *state, void *user_data) {
+  ztap_state.state = cur_dance(state);
+  switch (ztap_state.state) {
+    case SINGLE_TAP: register_code(KC_Z); break;
+    case SINGLE_HOLD: register_code(KC_LCTL); break;
+    case DOUBLE_TAP: register_code(KC_Z);unregister_code(KC_Z);register_code(KC_Z); break;
+    case DOUBLE_HOLD: register_code(KC_LCTL);register_code(KC_Z);unregister_code(KC_Z); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_Z);unregister_code(KC_Z);register_code(KC_Z); break;
+  }
+}
+
+void z_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (ztap_state.state) {
+    case SINGLE_TAP: unregister_code(KC_Z); break;
+    case SINGLE_HOLD: unregister_code(KC_LCTL); break;
+    case DOUBLE_TAP: unregister_code(KC_Z);break;
+    case DOUBLE_HOLD: unregister_code(KC_LCTL);break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_Z);
+  }
+  ztap_state.state = 0;
+}
+
+/////
+////////
+/////////////
+
+
+static xtap spctap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+
+void spc_finished (qk_tap_dance_state_t *state, void *user_data) {
+  spctap_state.state = cur_dance(state);
+  switch (spctap_state.state) {
+    case SINGLE_TAP: register_code(KC_SPC); break;
+    case SINGLE_HOLD: layer_on(_NUM); break;
+    case DOUBLE_TAP: register_code(KC_SPC);unregister_code(KC_SPC);register_code(KC_SPC); break;
+    case DOUBLE_HOLD: layer_on(_NAV); break;
+    case DOUBLE_SINGLE_TAP: register_code(KC_SPC);unregister_code(KC_SPC);register_code(KC_SPC); break;
+  }
+}
+
+void spc_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (spctap_state.state) {
+    case SINGLE_TAP: unregister_code(KC_SPC); break;
+    case SINGLE_HOLD: layer_off(_NUM); break;
+    case DOUBLE_TAP: unregister_code(KC_SPC);break;
+    case DOUBLE_HOLD: layer_off(_NAV);break;
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_SPC);
+  }
+  spctap_state.state = 0;
+}
+
+/*
+static xtap spctap_state = {
+  .is_press_action = true,
+  .state = 0
+};
+
+void h_finished (qk_tap_dance_state_t *state, void *user_data) {
+  htap_state.state = cur_dance(state);
+  switch (htap_state.state) {
+    case SINGLE_TAP: register_code(KC_H); break;
+    case SINGLE_HOLD: layer_on(8); register_code(KC_LALT); break;
+    case DOUBLE_TAP: layer_invert(8); register_code(KC_LALT); break;
+    case DOUBLE_HOLD: register_code(KC_LALT);
+    case DOUBLE_SINGLE_TAP: register_code(KC_H);unregister_code(KC_H);register_code(KC_H);
+  }
+}
+
+void h_reset (qk_tap_dance_state_t *state, void *user_data) {
+  switch (htap_state.state) {
+    case SINGLE_TAP: unregister_code(KC_H); break;
+    case SINGLE_HOLD: layer_off(8); unregister_code(KC_LALT); break;
+    case DOUBLE_TAP: unregister_code(KC_LALT);break;
+    case DOUBLE_HOLD: unregister_code(KC_LALT);
+    case DOUBLE_SINGLE_TAP: unregister_code(KC_H);
+  }
+  htap_state.state = 0;
+}
+
+*/
+
 
 
 qk_tap_dance_action_t tap_dance_actions[] = {
@@ -640,5 +856,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [CT_AT] = ACTION_TAP_DANCE_TAP_HOLD(KC_LBRC, S(KC_INT3)),
     [CT_PGUP] = ACTION_TAP_DANCE_TAP_HOLD(KC_PGUP, KC_HOME),
     [CT_PGDN] = ACTION_TAP_DANCE_TAP_HOLD(KC_PGDN, KC_END),
-
+    [QD_A] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, a_finished, a_reset),
+    [QD_SPC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, spc_finished, spc_reset),
+    [QD_Z] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, z_finished, z_reset),
 };

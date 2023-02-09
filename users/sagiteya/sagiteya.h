@@ -12,6 +12,31 @@ enum userspace_layers {
   _GBF,
 };
 
+enum {
+  SINGLE_TAP = 1,
+  SINGLE_HOLD = 2,
+  DOUBLE_TAP = 3,
+  DOUBLE_HOLD = 4,
+  DOUBLE_SINGLE_TAP = 5, //send two single taps
+  TRIPLE_TAP = 6,
+  TRIPLE_HOLD = 7,
+
+  QUADRUPLE_TAP = 8,
+  QUADRUPLE_HOLD = 9,
+
+  QUINTUPLE_TAP = 10,
+  QUINTUPLE_HOLD = 11,
+
+  SEXTUPLE_TAP = 12,
+  SEXTUPLE_HOLD = 13,
+
+  SEPTUPLE_TAP = 14,
+  SEPTUPLE_HOLD = 15,
+
+  OCTUPLE_TAP = 16,
+  OCTUPLE_HOLD = 17
+};
+
 
 //List of macro keys
 enum userspace_custom_keycodes {
@@ -120,13 +145,24 @@ enum tap_dance_codes {
   CT_U_AST,
   CT_PGUP,
   CT_PGDN,
+  CT_AT,
+  QD_A,
+  QD_SPC,
+  QD_Z,
 };
+
 
 typedef struct {
     uint16_t tap;
     uint16_t hold;
     uint16_t held;
 } tap_dance_tap_hold_t;
+
+
+typedef struct {
+     bool is_press_action;
+    int state;
+} xtap;
 
 //tap dance actual-keymap kc defines
 #define SG_RBRC TD(CT_RBRC_END)
@@ -164,6 +200,9 @@ typedef struct {
 #define SG_AT TD(CT_AT)
 #define SG_PGUP TD(CT_PGUP)
 #define SG_PGDN TD(CT_PGDN)
+#define Q_A TD(QD_A)
+#define Q_SPC TD(QD_SPC)
+#define Q_Z TD(QD_Z)
 
 //other key defines
 
@@ -179,6 +218,23 @@ typedef struct {
 #define SG_F SFT_T(KC_F) 
 #define SG_J SFT_T(KC_J)
 #define SG_Z CTL_T(KC_Z)
+
+
+
+//int cur_dance (qk_tap_dance_state_t *state);
+//tint hold_cur_dance (qk_tap_dance_state_t *state);
+/*
+void a_finished (qk_tap_dance_state_t *state, void *user_data);
+void a_reset (qk_tap_dance_state_t *state, void *user_data);
+
+void spc_finished (qk_tap_dance_state_t *state, void *user_data);
+void spc_reset (qk_tap_dance_state_t *state, void *user_data);
+
+void z_finished (qk_tap_dance_state_t *state, void *user_data);
+void z_reset (qk_tap_dance_state_t *state, void *user_data);
+*/
+
+
 
 // Since our quirky block definitions are basically a list of comma separated
 // arguments, we need a wrapper in order for these definitions to be
@@ -276,38 +332,38 @@ typedef struct {
 
 #define   _______________Ansi65__Row__0_______________    KC_ESC, SG_1, SG_2, SG_3, SG_4, SG_5, SG_6, SG_7, SG_8, SG_9, SG_0, SG_MINS,  SG_TILD,  SG_AT,  SG_PGUP
 #define   _______________Ansi65__Row__1_______________    KC_TAB, SG_Q, SG_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, SG_LBRC,  SG_RBRC,  KC_BSPC,  KC_DEL
-#define   _______________Ansi65__Row__2_______________    SG_CAPS,  SG_A, KC_S, SG_D, SG_F, KC_G, KC_H, SG_J, SG_K, KC_L, SG_SCLN,  KC_QUOT,  KC_ENT,   SG_PGDN
-#define   _______________Ansi65__Row__3_______________    KC_LSFT,  SG_Z, SG_X, SG_C, SG_V, SG_B, KC_N, SG_M, KC_COMM,  KC_DOT, SG_SLSH,  SG_RSFT,    KC_UP,  KC_LCTL
-#define   _______________Ansi65__Row__4_______________    TT(_GBF), KC_LGUI,  KC_LALT,      SG_SPC2,        KC_RALT,  QK_LEAD,  MO(_NAV), KC_LEFT,  KC_DOWN,  KC_RGHT
+#define   _______________Ansi65__Row__2_______________    SG_CAPS,  Q_A, KC_S, SG_D, SG_F, KC_G, KC_H, SG_J, SG_K, KC_L, SG_SCLN,  KC_QUOT,  KC_ENT,   SG_PGDN
+#define   _______________Ansi65__Row__3_______________    KC_LSFT,  Q_Z, SG_X, SG_C, SG_V, SG_B, KC_N, SG_M, KC_COMM,  KC_DOT, SG_SLSH,  SG_RSFT,    KC_UP,  KC_LCTL
+#define   _______________Ansi65__Row__4_______________    TT(_GBF), KC_LGUI,  KC_LALT,      Q_SPC,        KC_RALT,  QK_LEAD,  MO(_NAV), KC_LEFT,  KC_DOWN,  KC_RGHT
                                   
 #define   _______________Ansi65__Row__NUM0____________    KC_ESC, KC_F12, KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12, _______,  _______
-#define   _______________Ansi65__Row__NUM1____________    C(S(KC_TAB),  C(KC_TAB),  KC_MS_BTN2, KC_MS_UP, KC_MS_BTN1, _______,  KC_NUM, KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  KC_KP_EQUAL,    KC_DEL, _______
+#define   _______________Ansi65__Row__NUM1____________    C(S(KC_TAB)),  C(KC_TAB),  KC_MS_BTN2, KC_MS_UP, KC_MS_BTN1, _______,  KC_NUM, KC_KP_7,  KC_KP_8,  KC_KP_9,  KC_KP_MINUS,  KC_KP_EQUAL,    _______, _______, _______
 #define   _______________Ansi65__Row__NUM2____________    _______,  _______,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT,  KC_MS_WH_UP,  KC_BSPC,  KC_KP_4,  KC_KP_5,  KC_KP_6,  KC_KP_PLUS, KC_PAST,  _______,    _______
-#define   _______________Ansi65__Row__NUM3____________    _______,  _______,  _______,  _______,  KC_MS_WH_DOWN,  _______,  KC_KP_0,  KC_KP_1 KC_KP_2,  KC_KP_3,  KC_KP_DOT,  KC_MS_BTN1,   KC_MS_UP, KC_MS_BTN2,
-#define   _______________Ansi65__Row__NUM4____________    _______,  _______,  _______,      _______,        KC_MENU,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT,
+#define   _______________Ansi65__Row__NUM3____________    _______,  _______,  _______,  _______,  KC_MS_WH_DOWN,  _______,  KC_KP_0,  KC_KP_1, KC_KP_2,  KC_KP_3,  KC_KP_DOT,  KC_MS_BTN1,   KC_MS_UP, KC_MS_BTN2
+#define   _______________Ansi65__Row__NUM4____________    _______,  _______,  _______,      _______,        KC_MENU,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
                                   
-#define   _______________Ansi65__Row__NAV0____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-#define   _______________Ansi65__Row__NAV1____________    _______,  KC_HOME,  KC_END, KC_UP,  KC_MENU,  _______,  _______,  KC_HOME,  KC_UP,  KC_PGUP,  KC_MENU,  _______,  _______,  _______,  _______,
-#define   _______________Ansi65__Row__NAV2____________    _______,  C(KC_LSFT), KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  _______,  _______,  _______,
-#define   _______________Ansi65__Row__NAV3____________    _______,  C(KC_Z),  C(KC_X),  C(KC_C),  C(KC_V),  _______,  _______,  KC_END, _______,  KC_PGDN,  _______,  _______,    _______,  _______,
+#define   _______________Ansi65__Row__NAV0____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
+#define   _______________Ansi65__Row__NAV1____________    _______,  KC_HOME,  KC_END, KC_UP,  KC_MENU,  _______,  _______,  KC_HOME,  KC_UP,  KC_PGUP,  KC_MENU,  _______,  _______,  _______,  _______
+#define   _______________Ansi65__Row__NAV2____________    _______,  C(KC_LSFT), KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  _______,  _______
+#define   _______________Ansi65__Row__NAV3____________    _______,  C(KC_Z),  C(KC_X),  C(KC_C),  C(KC_V),  _______,  _______,  KC_END, _______,  KC_PGDN,  _______,  _______,    _______,  _______
 #define   _______________Ansi65__Row__NAV4____________    _______,  _______,  _______,      _______,        _______,  _______,  _______,  _______,  _______,  _______
                                   
-#define   _______________Ansi65__Row__GBF0____________    GRABURL,  REFRESH,  BOOKMARK1,  BOOKMARK2,  BOOKMARK3,  BOOKMARK4,  BOOKMARK5,  BOOKMARK6,  BOOKMARK7,  BOOKMARK8,  BOOKMARK9,  BOOKMARK10, _______,  _______,  _______,
-#define   _______________Ansi65__Row__GBF1____________    C(S(KC_TAB),  C(KC_TAB),  KC_MS_UP, KC_MS_BTN1, A(KC_LEFT), _______,  _______,  KC_HOME,  KC_UP,  KC_PGUP,  KC_MENU,  _______,  _______,  _______,  _______,
-#define   _______________Ansi65__Row__GBF2____________    _______,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT,  A(KC_RIGHT),  KC_MS_BTN1, _______,  KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  _______,    _______,
-#define   _______________Ansi65__Row__GBF3____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_END, _______,  KC_PGDN,  _______,  KC_MS_BTN1,   KC_MS_UP, KC_MS_BTN2,
-#define   _______________Ansi65__Row__GBF4____________    _______,  _______,  _______,      _______,        _______,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT,
+#define   _______________Ansi65__Row__GBF0____________    GRABURL,  REFRESH,  BOOKMARK1,  BOOKMARK2,  BOOKMARK3,  BOOKMARK4,  BOOKMARK5,  BOOKMARK6,  BOOKMARK7,  BOOKMARK8,  BOOKMARK9,  BOOKMARK10, _______,  _______,  RGB_TOG
+#define   _______________Ansi65__Row__GBF1____________    C(S(KC_TAB)),  C(KC_TAB),  KC_MS_UP, KC_MS_BTN1, A(KC_LEFT), _______,  _______,  KC_HOME,  KC_UP,  KC_PGUP,  KC_MENU,  _______,  _______,  _______,  _______
+#define   _______________Ansi65__Row__GBF2____________    _______,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT,  A(KC_RIGHT),  KC_MS_BTN1, _______,  KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  _______,  _______
+#define   _______________Ansi65__Row__GBF3____________    _______,  BM_BAHA,  BM_BROD,  BM_EWIYAR,  BM_RA,  BM_PROHARD,  _______,  KC_END, _______,  KC_PGDN,  _______,  KC_MS_BTN1,   KC_MS_UP, KC_MS_BTN2
+#define   _______________Ansi65__Row__GBF4____________    _______,  _______,  _______,      _______,        _______,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
                                   
-#define   _______________Ansi65__Row__MSC0____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-#define   _______________Ansi65__Row__MSC1____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-#define   _______________Ansi65__Row__MSC2____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,
-#define   _______________Ansi65__Row__MSC3____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,
+#define   _______________Ansi65__Row__MSC0____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
+#define   _______________Ansi65__Row__MSC1____________    _______, S(KC_1),    S(KC_2),   S(KC_3),  S(KC_4),  S(KC_5),    S(KC_6),     S(KC_7),    S(KC_8),    S(KC_9),  KC_MINUS,    S(KC_MINS),  S(KC_EQL),  _______,  _______
+#define   _______________Ansi65__Row__MSC2____________    _______,   _______,  _______,  _______,  _______, _______,  _______,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_UP,  _______,  _______,    _______
+#define   _______________Ansi65__Row__MSC3____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______
 #define   _______________Ansi65__Row__MSC4____________    _______,  _______,  _______,      _______,        _______,  _______,  _______,  _______,  _______,  _______
                                   
-#define   _______________Ansi65__Row___FN0____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-#define   _______________Ansi65__Row___FN1____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
-#define   _______________Ansi65__Row___FN2____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,
-#define   _______________Ansi65__Row___FN3____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______,
+#define   _______________Ansi65__Row___FN0____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
+#define   _______________Ansi65__Row___FN1____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
+#define   _______________Ansi65__Row___FN2____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______
+#define   _______________Ansi65__Row___FN3____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,    _______,  _______
 #define   _______________Ansi65__Row___FN4____________    _______,  _______,  _______,      _______,        _______,  _______,  _______,  _______,  _______,  _______
 
 /* Single 4x4 board only
@@ -326,6 +382,27 @@ typedef struct {
 #define _______________NUMPAD_Row__1_______________  KC_KP_4, KC_KP_5, KC_KP_6,   KC_SPC
 #define _______________NUMPAD_Row__2_______________  KC_KP_1, KC_KP_2, KC_KP_3,   KC_PENT
 #define _______________NUMPAD_Row__3_______________  KC_KP_0, TD(LYR_TAP_DANCE), KC_KP_DOT, KC_PMNS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Gherkin
  * .-----------------------------------------------------------------------------------------.
