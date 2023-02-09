@@ -63,6 +63,43 @@ __attribute__ ((weak))
 void led_set_keymap(uint8_t usb_led) {}
 
 
+void matrix_scan_user(void) {
+ LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_ONE_KEY(KC_P) {
+      // Anything you can do in a macro.
+      register_code(KC_LCTL);
+      register_code(KC_PRINTSCREEN);
+      unregister_code(KC_PRINTSCREEN);
+      unregister_code(KC_LCTL);
+    }
+    SEQ_ONE_KEY(KC_SEMICOLON) {
+      // Anything you can do in a macro.
+     register_code(KC_LALT);
+      register_code(KC_PRINTSCREEN);
+      unregister_code(KC_PRINTSCREEN);
+      unregister_code(KC_LALT);
+    }
+    SEQ_TWO_KEYS(KC_B, KC_A) {
+      register_code(BM_BAHA);
+      unregister_code(BM_BAHA);
+    }
+    SEQ_THREE_KEYS(KC_A, KC_R, KC_D) {
+      register_code(BM_PROHARD);
+      unregister_code(BM_PROHARD);
+    //  SEND_STRING("https://start.duckduckgo.com\n");
+    }
+    SEQ_TWO_KEYS(KC_R, KC_O) {
+      register_code(BM_BROD);
+      unregister_code(BM_BROD);
+      
+    }
+  }
+
+}
+
 //Per key tapping terms for tap dance to prevent accidental activations on alphas etc
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -163,8 +200,115 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
 
       }
-      break;    
-  
+      break;  
+    case BOOKMARK5:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BOOKMARK6:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BOOKMARK7:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT)  SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BOOKMARK8:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BOOKMARK9:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT)  SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BOOKMARK10:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM_PBAHA:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/301061/1/0/59"SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+        
+     case BM_PROHARD:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/305261/28"SS_TAP(X_ENTER));
+      } else {   
+
+      }
+      break;
+
+     case BM_PROMAG:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/305441/28/1"SS_TAP(X_ENTER));
+      } else {   
+
+      }
+      break;   
+     case BM_BROD:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/303171/1/0/524"SS_TAP(X_ENTER));
+      } else {   
+
+      }
+      break;   
+     case BM_RA:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/305351/1/0/44"SS_TAP(X_ENTER));
+      } else {   
+
+      }
+      break;   
+     case BM_EWIYAR:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/305221/1/0/44"SS_TAP(X_ENTER));
+      } else {   
+
+      }
+      break;   
+     case BM_COLOHL:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/300491/1/0/47"SS_TAP(X_ENTER));
+      } else {   
+
+      }
+      break;   
+     case BM_LIND:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#quest/supporter/305171/1/0/535"SS_TAP(X_ENTER));
+      } else {   
+
+      }
+      break;   
+     case BM_JDROPS:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6)"game.granbluefantasy.jp/#shop/exchange/trajectory"SS_TAP(X_ENTER));
+      } else {   
+
+      }
+      break;   
+
   return true;
 
 
@@ -402,7 +546,27 @@ qk_tap_dance_action_t *action;
               tap_code16(tap_hold->tap);
           }
           break;
-
+    case TD(CT_AT):  // list all tap dance keycodes with tap-hold configurations
+          action = &tap_dance_actions[TD_INDEX(keycode)];
+          if (!record->event.pressed && action->state.count && !action->state.finished) {
+              tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
+              tap_code16(tap_hold->tap);
+          }
+          break;
+    case TD(CT_PGUP):  // list all tap dance keycodes with tap-hold configurations
+          action = &tap_dance_actions[TD_INDEX(keycode)];
+          if (!record->event.pressed && action->state.count && !action->state.finished) {
+              tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
+              tap_code16(tap_hold->tap);
+          }
+          break;
+    case TD(CT_PGDN):  // list all tap dance keycodes with tap-hold configurations
+          action = &tap_dance_actions[TD_INDEX(keycode)];
+          if (!record->event.pressed && action->state.count && !action->state.finished) {
+              tap_dance_tap_hold_t *tap_hold = (tap_dance_tap_hold_t *)action->user_data;
+              tap_code16(tap_hold->tap);
+          }
+          break;
   };
   return true;
 }
@@ -473,5 +637,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [CT_F10] = ACTION_TAP_DANCE_TAP_HOLD(KC_0, KC_F10),
     [CT_F11] = ACTION_TAP_DANCE_TAP_HOLD(KC_MINS, S(KC_MINS)),
     [CT_F12] = ACTION_TAP_DANCE_TAP_HOLD(KC_EQL, S(KC_EQL)),
+    [CT_AT] = ACTION_TAP_DANCE_TAP_HOLD(KC_LBRC, S(KC_INT3)),
+    [CT_PGUP] = ACTION_TAP_DANCE_TAP_HOLD(KC_PGUP, KC_HOME),
+    [CT_PGDN] = ACTION_TAP_DANCE_TAP_HOLD(KC_PGDN, KC_END),
 
 };

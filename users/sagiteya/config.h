@@ -34,4 +34,12 @@
 #    define COMBO_TERM 80
 
 #    define COMBO_VARIABLE_LEN
-//#    define DEBOUNCE 8
+
+#    ifdef DEBOUNCE
+#    undef DEBOUNCE
+#    endif
+
+#    define DEBOUNCE 8
+
+#    define LEADER_TIMEOUT 300
+#    define LEADER_PER_KEY_TIMING
