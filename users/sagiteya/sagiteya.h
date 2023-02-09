@@ -351,8 +351,8 @@ void z_reset (qk_tap_dance_state_t *state, void *user_data);
 #define   _______________Ansi65__Row__GBF0____________    GRABURL,  REFRESH,  BOOKMARK1,  BOOKMARK2,  BOOKMARK3,  BOOKMARK4,  BOOKMARK5,  BOOKMARK6,  BOOKMARK7,  BOOKMARK8,  BOOKMARK9,  BOOKMARK10, _______,  _______,  RGB_TOG
 #define   _______________Ansi65__Row__GBF1____________    C(S(KC_TAB)),  C(KC_TAB),  KC_MS_UP, KC_MS_BTN1, A(KC_LEFT), _______,  _______,  KC_HOME,  KC_UP,  KC_PGUP,  KC_MENU,  _______,  _______,  _______,  _______
 #define   _______________Ansi65__Row__GBF2____________    _______,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT,  A(KC_RIGHT),  KC_MS_BTN1, _______,  KC_LEFT,  KC_DOWN,  KC_RGHT,  _______,  _______,  _______,  _______
-#define   _______________Ansi65__Row__GBF3____________    _______,  BM_BAHA,  BM_BROD,  BM_EWIYAR,  BM_RA,  BM_PROHARD,  _______,  KC_END, _______,  KC_PGDN,  _______,  KC_MS_BTN1,   KC_MS_UP, KC_MS_BTN2
-#define   _______________Ansi65__Row__GBF4____________    _______,  _______,  _______,      _______,        _______,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
+#define   _______________Ansi65__Row__GBF3____________    _______,  BM_BAHA,  BM_PROHARD,  BM_PROMAG,  BM_EWIYAR,  BM_RA, BM_BROD,    KC_END, _______,  KC_PGDN,  _______,  KC_MS_BTN1,   KC_MS_UP, KC_MS_BTN2
+#define   _______________Ansi65__Row__GBF4____________    _______,  _______,  BM_JDROPS,      _______,        _______,  KC_MS_WH_UP,  KC_MS_WH_DOWN,  KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
                                   
 #define   _______________Ansi65__Row__MSC0____________    _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______
 #define   _______________Ansi65__Row__MSC1____________    _______, S(KC_1),    S(KC_2),   S(KC_3),  S(KC_4),  S(KC_5),    S(KC_6),     S(KC_7),    S(KC_8),    S(KC_9),  KC_MINUS,    S(KC_MINS),  S(KC_EQL),  _______,  _______
