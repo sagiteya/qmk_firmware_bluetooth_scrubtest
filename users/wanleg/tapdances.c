@@ -3,6 +3,10 @@
 
 //audio settings for one of the tap dances below
 #ifdef AUDIO_ENABLE
+
+
+
+
   float lyrup_song[][2]     = SONG(MUSIC_ON_SOUND);
   float lyrdown_song[][2]  = SONG(MUSIC_OFF_SOUND);
 #endif
@@ -26,6 +30,13 @@ typedef struct {
   bool is_press_action;
   int state;
 } tap;
+
+
+typedef struct {
+    uint16_t tap;
+    uint16_t hold;
+    uint16_t held;
+} tap_dance_tap_hold_t;
 
 int cur_dance (qk_tap_dance_state_t *state) {
   if (state->count == 1) {

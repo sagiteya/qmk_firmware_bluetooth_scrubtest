@@ -1,4 +1,4 @@
-SRC += sagiteya.c
+SRC += sagiteya.c 
 VPATH  +=  keyboards/gboards/
 
 MOUSEKEY_ENABLE = yes       # Mouse keys
