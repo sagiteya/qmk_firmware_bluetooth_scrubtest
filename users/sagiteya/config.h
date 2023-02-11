@@ -17,7 +17,7 @@
 #pragma once
 
 #    define MOUSEKEY_INERTIA
-#    define MOUSEKEY_MAX_SPEED 28
+#    define MOUSEKEY_MAX_SPEED 32
 #    define MOUSEKEY_TIME_TO_MAX 40
 #    define MOUSEKEY_FRICTION 32
 
@@ -27,7 +27,7 @@
 #    define TAPPING_TOGGLE 2
 #    define ONESHOT_TAP_TOGGLE 2
 
-#    define TAPPING_TERM 170
+#    define TAPPING_TERM 175
 #    define TAPPING_TERM_PER_KEY
 
 #    define COMBO_ONLY_FROM_LAYER 0
@@ -43,3 +43,5 @@
 
 #    define LEADER_TIMEOUT 300
 #    define LEADER_PER_KEY_TIMING
+
+
