@@ -18,8 +18,8 @@
 
 #    define MOUSEKEY_INERTIA
 #    define MOUSEKEY_MAX_SPEED 32
-#    define MOUSEKEY_TIME_TO_MAX 40
-#    define MOUSEKEY_FRICTION 32
+#    define MOUSEKEY_TIME_TO_MAX 32
+#    define MOUSEKEY_FRICTION 24
 
 
 #    define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
@@ -43,5 +43,7 @@
 
 #    define LEADER_TIMEOUT 300
 #    define LEADER_PER_KEY_TIMING
+
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 30
 
 
