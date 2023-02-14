@@ -231,7 +231,7 @@ enum tap_dance_codes {
 #define SG_END  MT(MOD_LALT,KC_END)
 #define SG_RSFT MT(MOD_RSFT,KC_INT1)
 #define SG_SLSH MT(MOD_RSFT,KC_SLSH)
-#define SG_SCLN CTL_T(KC_SEMICOLON)
+#define SG_SCLN ALT_T(KC_SEMICOLON)
 #define SG_F SFT_T(KC_F) 
 #define SG_J SFT_T(KC_J)
 #define SG_Z CTL_T(KC_Z)
@@ -241,8 +241,6 @@ enum tap_dance_codes {
 #define SG_H TD(CT_H)
 
 //Tap Dance Declarations (list of my tap dance configurations)
-
-
 
 
 
@@ -304,7 +302,6 @@ void z_reset (qk_tap_dance_state_t *state, void *user_data);
  * '--------------------------------------------------------------------------------------------------+------'
  */
 
-
 #define _______________Alice65_Row__0_______________   KC_ESC,   SG_1,    SG_2,    SG_3,     SG_4,    SG_5,     SG_6,    SG_7,    SG_8,    SG_9,    SG_0,    SG_MINS, SG_TILD,  SG_AT, KC_MUTE
 #define _______________Alice65_Row__1_______________   SG_TAB,   SG_Q,    SG_W,    KC_E,     KC_R,    KC_T,     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    Q_SBRC, SG_RBRC, KC_BSPC, SG_PGUP
 #define _______________Alice65_Row__2_______________   SG_CAPS,  Q_A,    SG_S,    SG_D,     SG_F,    SG_G,     SG_H,    SG_J,    SG_K,    SG_L, SG_SCLN, KC_QUOT, KC_ENT,           SG_PGDN
@@ -312,28 +309,28 @@ void z_reset (qk_tap_dance_state_t *state, void *user_data);
 #define _______________Alice65_Row__4_______________   Q_RCTL,  KC_LGUI, KC_LALT, SG_SPC1,          SG_SPC2, SG_SPC3,         SG_SPC4,  Q_RCTL,         KC_LEFT, KC_DOWN, KC_RGHT 
 
 #define _______________Alice65_Row__0NUM____________   KC_ESC,   KC_F1,    KC_F2,    KC_F3,     KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,     KC_F10,    KC_F11, KC_F12,  _______, _______
-#define _______________Alice65_Row__1NUM____________   S(C(KC_TAB)), C(KC_TAB), KC_MS_BTN2, KC_MS_UP, KC_MS_BTN1,  KC_MS_WH_UP, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS, S(KC_MINS), _______, _______, KC_PGUP
-#define _______________Alice65_Row__2NUM____________   _______,  KC_MS_WH_DOWN, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_MS_WH_DOWN, KC_BSPC, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS, KC_PAST, _______, KC_PGDN
-#define _______________Alice65_Row__3NUM____________   _______, KC_LEFT,  KC_DOWN,  KC_UP,  KC_RIGHT, _______, _______, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_DOT,  KC_MS_BTN1, KC_MS_UP  
+#define _______________Alice65_Row__1NUM____________   S(C(KC_TAB)), C(KC_TAB), KC_MS_UP,  KC_MS_BTN1,  A(KC_LEFT),  KC_MS_WH_UP, KC_NUM, KC_KP_7, KC_KP_8, KC_KP_9, KC_KP_MINUS, S(KC_MINS), _______, _______, KC_PGUP
+#define _______________Alice65_Row__2NUM____________   _______,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT,  A(KC_RGHT),  KC_MS_WH_DOWN, KC_BSPC, KC_KP_4, KC_KP_5, KC_KP_6, KC_KP_PLUS, KC_PAST, _______, KC_PGDN
+#define _______________Alice65_Row__3NUM____________   _______, KC_MS_BTN2,  KC_MS_WH_DOWN, KC_MS_WH_UP, _______, _______, _______, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_KP_DOT,  KC_MS_BTN1, KC_MS_UP  
 #define _______________Alice65_Row__4NUM____________   TO(_BL), KC_MS_WH_DOWN, KC_MS_WH_UP, _______,           _______, _______,         _______, TO(_BL),          KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
 
 
 #define _______________Alice65_Row__0NAV____________   KC_ESC,   KC_F1,    KC_F2,    KC_F3,     KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,     KC_F10,    KC_F11, KC_F12,  _______, _______
-#define _______________Alice65_Row__1NAV____________   S(C(KC_TAB)), C(KC_TAB), C(KC_LSFT), KC_UP, C(KC_LSFT),  _______, _______, _______, KC_UP, _______, _______, KC_RBRC, KC_BSLS, _______, KC_PGUP
+#define _______________Alice65_Row__1NAV____________   S(C(KC_TAB)), C(KC_TAB), C(KC_LEFT), KC_UP, C(KC_RGHT),  _______, _______, _______, KC_UP, _______, _______, KC_RBRC, KC_BSLS, _______, KC_PGUP
 #define _______________Alice65_Row__2NAV____________   _______, KC_HOME, KC_LEFT,  KC_DOWN,  KC_RIGHT, KC_END, KC_BSPC, KC_LEFT,  KC_DOWN, KC_RIGHT, _______, _______, _______, KC_PGDN
-#define _______________Alice65_Row__3NAV____________   _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_UP, KC_MS_RIGHT, KC_MS_BTN1, KC_MS_BTN2, KC_MS_BTN1, KC_MS_LEFT, KC_MS_UP, KC_MS_DOWN, KC_MS_RIGHT, KC_MS_BTN1, KC_MS_UP  
+#define _______________Alice65_Row__3NAV____________   _______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), KC_APP, KC_MS_BTN2, KC_MS_BTN1, KC_MS_LEFT, KC_MS_UP, KC_MS_DOWN, KC_MS_RIGHT, KC_MS_BTN1, KC_MS_UP  
 #define _______________Alice65_Row__4NAV____________   TO(_BL), KC_MS_WH_DOWN, KC_MS_WH_UP, QK_LEAD,           _______, _______,         _______, _______,          KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
 
-#define _______________Alice65_Row__0GBF____________   GRABURL,   REFRESH,  BOOKMARK1,  BOOKMARK2,  BOOKMARK3,  BOOKMARK4,    BOOKMARK5, BOOKMARK6, BOOKMARK7, BOOKMARK8, BOOKMARK10, _______, BM12,  RGB_TOG, _______
+#define _______________Alice65_Row__0GBF____________   GRABURL,   REFRESH,  BOOKMARK1,  BOOKMARK2,  BOOKMARK3,  BOOKMARK4,    BOOKMARK5, BOOKMARK6, BOOKMARK7, BOOKMARK8, BOOKMARK9, BOOKMARK10, BM12,  RGB_TOG, _______
 #define _______________Alice65_Row__1GBF____________   S(C(KC_TAB)), C(KC_TAB), KC_MS_UP,  KC_MS_BTN1,  A(KC_LEFT),  KC_F5, A(KC_LEFT), BOOKMARK1, BOOKMARK2, KC_MS_BTN1, _______, _______, _______, _______, KC_PGUP
 #define _______________Alice65_Row__2GBF____________   KC_MS_BTN2,  KC_MS_LEFT,  KC_MS_DOWN,  KC_MS_RIGHT,  A(KC_RGHT),  KC_MS_BTN1, BM04, BM05, KC_MS_BTN1, BM06, _______, _______, _______, KC_PGDN
-#define _______________Alice65_Row__3GBF____________   _______, A(KC_LEFT), KC_MS_WH_UP, KC_MS_WH_DOWN, _______, _______, _______, _______, KC_MS_BTN1, _______, _______, _______, KC_MS_BTN1, KC_MS_UP  
+#define _______________Alice65_Row__3GBF____________   _______, A(KC_LEFT), KC_MS_WH_UP, KC_MS_WH_DOWN, _______, _______, _______,  BOOKMARK8, BOOKMARK9, BOOKMARK10,  A(KC_LEFT), A(KC_RGHT), KC_MS_BTN1, KC_MS_UP  
 #define _______________Alice65_Row__4GBF____________   TO(_BL), _______, _______, A(KC_LEFT),           KC_MS_BTN1, TO(_BL),         A(KC_RGHT), KC_MS_BTN1,          KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
 
-#define _______________Alice65_Row__0MISC___________   KC_ESC,   KC_F1,    KC_F2,    KC_F3,     KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,     KC_F10,    KC_F11, KC_F12,  _______, _______
-#define _______________Alice65_Row__1MISC___________   _______, S(KC_1),    S(KC_2),   S(KC_3),  S(KC_4),  S(KC_5),    S(KC_6),  S(KC_7),  S(KC_8),    S(KC_9),  KC_MINUS,    S(KC_MINS),  S(KC_EQL),  KC_DEL, KC_PGUP
-#define _______________Alice65_Row__2MISC___________   _______, KC_1,      KC_2,      KC_3,      KC_4,     KC_5,     KC_6,        KC_7,   KC_8,    KC_9, KC_0, S(KC_MINS), _______, KC_PGDN
-#define _______________Alice65_Row__3MISC___________   _______, _______, KC_F2, KC_F5, KC_F12, _______, _______, _______, _______, _______, _______, _______, KC_MS_BTN1, KC_MS_UP  
+#define _______________Alice65_Row__0MISC___________   KC_ESC,   KC_F1,    KC_F2,    KC_F3,     KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,     KC_F10,    KC_F11, KC_F12,  S(KC_EQL), _______
+#define _______________Alice65_Row__1MISC___________   _______, S(KC_1),    S(KC_2),   S(KC_3),  S(KC_4),  S(KC_5),    S(KC_6),  S(KC_7),  KC_RBRC,    KC_BSLS,  KC_MINUS,    S(KC_MINS), _______, _______, KC_PGUP
+#define _______________Alice65_Row__2MISC___________   _______, S(KC_1),    S(KC_2),   S(KC_3),  S(KC_4),  S(KC_5),    S(KC_6),  S(KC_7),  S(KC_8),    S(KC_9),  KC_MINUS,    S(KC_MINS),  _______,            KC_PGDN
+#define _______________Alice65_Row__3MISC___________   _______, _______, KC_F2, KC_F5, KC_F12, _______, _______, _______, S(KC_INT1), _______, _______, _______, KC_MS_BTN1, KC_MS_UP  
 #define _______________Alice65_Row__4MISC___________   TO(_BL), _______, _______, _______,           _______, _______,         _______, TO(_BL),         KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
 
 #define _______________Alice65_Row__0FN_____________   KC_ESC,   KC_F1,    KC_F2,    KC_F3,     KC_F4,    KC_F5,     KC_F6,    KC_F7,    KC_F8,    KC_F9,     KC_F10,    KC_F11, KC_F12,  _______, _______

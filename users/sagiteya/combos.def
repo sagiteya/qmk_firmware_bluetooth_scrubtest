@@ -1,24 +1,70 @@
 // COMBOS
 //   name      result           chord keys
 
-COMB(numtoggle, TG(_NUM),      KC_U, KC_I, KC_O)
+COMB(Lnumtoggle, TG(_NUM),      KC_U, KC_I, KC_O)
+																		// UIO to toggle numpad and mousekeys
+COMB(Rnumtoggle, TG(_NUM),      SG_Q, SG_W, KC_E)
+																		// QWE to toggle numpad and mousekeys
+
 COMB(navtoggle1, TG(_NAV),       Q_A, SG_S, SG_D)
+																		// ASD for nav later
 COMB(navtoggle2, TG(_NAV),	   SG_K, SG_L, SG_SCLN)
+																		// KL; for nav layer
 SUBS(leftparen,               SS_LSFT("8"),        SG_8,  SG_9)
+																		// 8 9 for ( 
 SUBS(rightparen,              SS_LSFT("9"),        SG_9,  SG_0)
+																		// 9 0 for )
+SUBS(pipes,              SS_DOWN(X_LSFT) SS_TAP(X_INT3) SS_UP(X_LSFT),        SG_0,  SG_MINS)
+																		// 0 - for |
+COMB(yen,              KC_INT3,        SG_MINS,  SG_TILD)
+																		// 0 - for |
+//COMB(emdash, 		UC(0x2014), SG_K, SG_J)
+
+COMB(menukeyR,              KC_APP,        KC_P,  Q_SBRC)
+																		// P and [] for menu
+
+COMB(menukeyL,              KC_APP,        SG_V,  SG_B, SG_C)
+																		// P and [] for menu
+
 COMB(fv_enter,                KC_ENT,          SG_F,  SG_V)
+																		// FV for enter
 COMB(jn_enter,                KC_ENT,          SG_J,  KC_N)
+																		// JN for enter
 SUBS(apostromash,             SS_LSFT("7"),      SG_7,  SG_8)
+																		// 7 8 for apos
 COMB(langswap,                KC_GRV,          SG_F,  SG_W)
+																		// WF for JP/EN
 COMB(weresc,                  KC_ESC,          SG_W, KC_E, KC_R)
+																		// WER for esc 
+COMB(qwesc,                  KC_ESC,          SG_W, SG_Q)
+																		// QW for esc 
+
 COMB(ef2,                  KC_F2,          KC_E, SG_2)
+																		// E and 2 for f2
 COMB(tf5,                  KC_F5,          KC_T, SG_5)
-SUBS(back,                    SS_DOWN(X_LALT) SS_TAP(X_LEFT) SS_UP(X_LALT),   KC_R, SG_4)
-SUBS(CAS_s,            SS_DOWN(X_LALT) SS_DOWN(X_LSFT) SS_DOWN(X_LCTL) SS_TAP(X_S) SS_UP(X_LALT) SS_UP(X_LSFT) SS_UP(X_LCTL),           SG_CAPS, SG_A, SG_S, SG_D)
-SUBS(CS_s,             SS_DOWN(X_LSFT) SS_DOWN(X_LCTL) SS_TAP(X_S) SS_UP(X_LSFT) SS_UP(X_LCTL),           SG_CAPS, SG_A, SG_S)
+																		// T and 5 for f5
+SUBS(r3bck,                    SS_DOWN(X_LALT) SS_TAP(X_LEFT) SS_UP(X_LALT),   KC_R, SG_3)
+																		// R and 3 for back 
+SUBS(r4fwd,                    SS_DOWN(X_LALT) SS_TAP(X_RGHT) SS_UP(X_LALT),   KC_R, SG_4)
+																		// R and 4 for forward
+
+// SUBS(CAS_s,            SS_DOWN(X_LALT) SS_DOWN(X_LSFT) SS_DOWN(X_LCTL) SS_TAP(X_S) SS_UP(X_LALT) SS_UP(X_LSFT) SS_UP(X_LCTL),           SG_CAPS, SG_A, SG_S, SG_D)
+																		//
+// SUBS(CS_s,             SS_DOWN(X_LSFT) SS_DOWN(X_LCTL) SS_TAP(X_S) SS_UP(X_LSFT) SS_UP(X_LCTL),           SG_CAPS, SG_A, SG_S)
+																		// 
 COMB(capword,           QK_CAPS_WORD_TOGGLE, SG_CAPS, SG_W)
+																		// Caps word for hitting Caps and W
 SUBS(alteffour,        SS_DOWN(X_LALT) SS_TAP(X_F4) SS_UP(X_LALT), Q_A, SG_4)
+																		// A and 4 for alt f4
 SUBS(aliceback,				SS_DOWN(X_LALT) SS_TAP(X_LEFT) SS_UP(X_LALT), SG_PGDN, KC_LEFT)
+																		// End/Pgnd and left for back
 COMB(numrowlayer,			MO(_MISC),	SG_SPC2, SG_SPC3)
-SUBS(copier,                    SS_DOWN(X_LCTL) SS_TAP(X_C) SS_UP(X_LCTL),   SG_Z, SG_C)
-SUBS(paster,                    SS_DOWN(X_LCTL) SS_TAP(X_X) SS_UP(X_LCTL),   SG_X, SG_V)
+																		// Middle spaces to get symbols layer (same as holding D or K)
+SUBS(copier,                    SS_DOWN(X_LCTL) SS_TAP(X_C) SS_UP(X_LCTL),   Q_Z, SG_C)
+																		// ZC to Copy
+SUBS(paster,                    SS_DOWN(X_LCTL) SS_TAP(X_V) SS_UP(X_LCTL),   SG_X, SG_V)
+																		// XV to Paste
+
+SUBS(cdset, "cd /" SS_TAP(X_QUOT) "/Users/Main/Documents/GitHub/qmk"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"firmware"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"bluetooth"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"scrubtest", SG_C,SG_D,SG_SPC1)
+
+SUBS(q8compset, "qmk compile -kb keychron/q8/ansi"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"encoder -km sagiteya", SG_Q,SG_8,SG_SPC1)

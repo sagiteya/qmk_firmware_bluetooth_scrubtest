@@ -165,10 +165,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [_BL] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [_NAV] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
-    [_NUM]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
-    [_FN]   = {ENCODER_CCW_CW(RGB_VAD, RGB_VAI)},
-    [_MISC]   = {ENCODER_CCW_CW(_______, _______)},
-    [_GBF]   = {ENCODER_CCW_CW(_______, _______)}
+    [_NAV] = {ENCODER_CCW_CW(KC_RBRC, KC_BSLS)},
+    [_NUM]   = {ENCODER_CCW_CW(KC_RBRC, KC_BSLS)},
+    [_FN]   = {ENCODER_CCW_CW(KC_RBRC, KC_BSLS)},
+    [_MISC]   = {ENCODER_CCW_CW(KC_RBRC, KC_BSLS)},
+    [_GBF]   = {ENCODER_CCW_CW(KC_RBRC, KC_BSLS)}
 };
 #endif // ENCODER_MAP_ENABLE
