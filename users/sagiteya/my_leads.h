@@ -12,18 +12,18 @@ void matrix_scan_user(void) {
       unregister_code(KC_PRINT_SCREEN);
       unregister_code(KC_LCTL);
     }
-    SEQ_ONE_KEY(KC_SEMICOLON) {
+    SEQ_ONE_KEY(SG_SCLN) {
       // Anything you can do in a macro.
      register_code(KC_LALT);
       register_code(KC_PRINT_SCREEN);
       unregister_code(KC_PRINT_SCREEN);
       unregister_code(KC_LALT);
     }
-    SEQ_TWO_KEYS(KC_B, Q_A) {
+    SEQ_TWO_KEYS(SG_B, Q_A) {
       register_code16(BM_BAHA);
       unregister_code16(BM_BAHA);
     }
-    SEQ_THREE_KEYS(KC_A, KC_R, KC_D) {
+    SEQ_THREE_KEYS(Q_A, KC_R, SG_D) {
       register_code16(BM_PROHARD);
       unregister_code16(BM_PROHARD);
       

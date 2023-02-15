@@ -146,7 +146,7 @@ void a_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP: register_code(KC_A); break;
     case SINGLE_HOLD: register_code(KC_LALT); break;
     case DOUBLE_TAP: register_code(KC_A);unregister_code(KC_A);register_code(KC_A); break;
-    case DOUBLE_HOLD: register_code(KC_LCTL);register_code(KC_A);unregister_code(KC_A); break;
+    case DOUBLE_HOLD: register_code(KC_LCTL);register_code(KC_END);unregister_code(KC_END);register_code(KC_LSFT);register_code(KC_HOME);unregister_code(KC_HOME);unregister_code(KC_LSFT); break;
     case DOUBLE_SINGLE_TAP: register_code(KC_A);unregister_code(KC_A);register_code(KC_A); break;
   }    
 }
@@ -263,6 +263,40 @@ void sbrc_reset (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 
+
+/////////////
+////right ctrl layer toggle
+////////////
+
+static xtap rctltap_state = {
+.is_press_action = true,
+.state = 0
+};
+
+
+void rctl_finished (qk_tap_dance_state_t *state, void *user_data) {
+rctltap_state.state = cur_dance(state);
+switch (rctltap_state.state) {
+case SINGLE_TAP: layer_invert(_GBF); break;
+case SINGLE_HOLD: register_code(KC_RCTL); break;
+//case DOUBLE_TAP: register_code(KC_Z);unregister_code(KC_Z);register_code(KC_Z); break;
+//case DOUBLE_HOLD: register_code(KC_LCTL);register_code(KC_Z);unregister_code(KC_Z); break;
+//case DOUBLE_SINGLE_TAP: register_code(KC_Z);unregister_code(KC_Z);register_code(KC_Z); break;
+  }
+}
+
+void rctl_reset (qk_tap_dance_state_t *state, void *user_data) {
+switch (rctltap_state.state) {
+case SINGLE_TAP: break;
+case SINGLE_HOLD: unregister_code(KC_RCTL); break;
+//case DOUBLE_TAP: unregister_code(KC_Z);break;
+//case DOUBLE_HOLD: unregister_code(KC_LCTL);break;
+//case DOUBLE_SINGLE_TAP: unregister_code(TG(_GBF));
+  }
+rctltap_state.state = 0;
+}
+
+
 /*
 static xtap spctap_state = {
   .is_press_action = true,
@@ -301,7 +335,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [CT_Q_HOME] = ACTION_TAP_DANCE_TAP_HOLD(KC_Q, KC_HOME),
     [CT_W_END] = ACTION_TAP_DANCE_TAP_HOLD(KC_W, KC_END),
     [CT_K_APOS] = ACTION_TAP_DANCE_TAP_HOLD(KC_K, S(KC_7)),
-    [CT_B_UNDER] = ACTION_TAP_DANCE_TAP_HOLD(KC_B, C(KC_Z)),
+    [CT_B_UNDER] = ACTION_TAP_DANCE_TAP_HOLD(KC_B, C(KC_B)),
 //    [CT_CTRL_CSTAB] = ACTION_TAP_DANCE_TAP_HOLD(S(C(KC_TAB)), KC_LCTL),
     [CT_X_CUT] = ACTION_TAP_DANCE_TAP_HOLD(KC_X, C(KC_X)),
     [CT_C_COPY] = ACTION_TAP_DANCE_TAP_HOLD(KC_C, C(KC_C)),
@@ -337,7 +371,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [QD_SPC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, spc_finished, spc_reset),
     [QD_Z] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, z_finished, z_reset),
     [QD_SBRC] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, sbrc_finished, sbrc_reset),
-    [CT_TAB] = ACTION_TAP_DANCE_TAP_HOLD(KC_TAB, C(KC_LSFT)),
+    [CT_TAB] = ACTION_TAP_DANCE_TAP_HOLD(KC_TAB, MO(_NAV)),
     [CT_G] = ACTION_TAP_DANCE_TAP_HOLD(KC_G, C(KC_BACKSPACE)),
     [CT_H] = ACTION_TAP_DANCE_TAP_HOLD(KC_H, C(KC_BACKSPACE)),
+    [QD_RCTL] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, rctl_finished, rctl_reset),
 };

@@ -2,7 +2,7 @@ SRC += sagiteya.c
 VPATH  +=  keyboards/gboards/
 
 MOUSEKEY_ENABLE = yes       # Mouse keys
-UNICODEMAP_ENABLE = no
+UNICODE_ENABLE = yes
 COMBO_ENABLE = yes
 TAP_DANCE_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes

@@ -19,6 +19,34 @@
 
 // clang-format off
 
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    for (uint8_t i = led_min; i < led_max; i++) {
+        switch(get_highest_layer(layer_state|default_layer_state)) {
+            case _GBF:
+                rgb_matrix_set_color(i, 10, 10, 10);
+                break;
+            case _NUM:
+                rgb_matrix_set_color(i, 20, 1, 1);
+                break;
+            case _NAV:
+                rgb_matrix_set_color(i, 1, 20, 20);
+                break;  
+            case _MISC:
+                rgb_matrix_set_color(i, 2, 20, 2);
+                break;    
+            case _BL:
+                rgb_matrix_set_color(i, RGB_OFF);
+                break;    
+            case _FN:
+                rgb_matrix_set_color(i, RGB_PURPLE);
+                break;
+            default:
+                break;
+        }
+    }
+    return false;
+}
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 

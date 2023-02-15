@@ -43,6 +43,46 @@ __attribute__ ((weak))
 void led_set_keymap(uint8_t usb_led) {}
 
 
+
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue Caps Word, with shift applied.
+        case KC_A ... KC_Z:
+        case KC_INT1:
+        case SG_Q:
+        case SG_W:
+        case SG_S:
+        case SG_D:
+        case SG_F:
+        case SG_G:
+        case SG_H:
+        case SG_J:
+        case SG_K:
+        case SG_L:
+        case SG_X:
+        case SG_C:
+        case SG_V:
+        case SG_B:
+        case SG_M:
+        case Q_A:
+        case Q_Z:
+            add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to next key.
+            return true;
+
+        // Keycodes that continue Caps Word, without shifting.
+        case KC_1 ... KC_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case KC_UNDS:
+            return true;
+
+        default:
+            return false;  // Deactivate Caps Word.
+    }
+}
+
+
+
 //Per key tapping terms for simple tap/hold tap dances to prevent accidental activations on alphas/get hold values faster etc
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -56,7 +96,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
         case TD(CT_A_ALL):
             return TAPPING_TERM + 100;
         case TD(QD_A):
-            return TAPPING_TERM + 100;
+            return TAPPING_TERM + 20;
         case TD(QD_SPC):
             return TAPPING_TERM + 10;    
         default:
@@ -88,11 +128,15 @@ bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
             // Do not force the mod-tap key press to be handled as a modifier
             // if any other key was pressed while the mod-tap key is held down.
             return true;
-        case SG_L:
+        case MT(MOD_LCTL,KC_L):
             // Do not force the mod-tap key press to be handled as a modifier
             // if any other key was pressed while the mod-tap key is held down.
             return true;
-        case SG_S:
+        case MT(MOD_LCTL,KC_S):
+            // Do not force the mod-tap key press to be handled as a modifier
+            // if any other key was pressed while the mod-tap key is held down.
+            return true;
+        case ALT_T(KC_SEMICOLON):
             // Do not force the mod-tap key press to be handled as a modifier
             // if any other key was pressed while the mod-tap key is held down.
             return true;
@@ -195,6 +239,125 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case BOOKMARK10:
       if (record->event.pressed) {
         SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_RGHT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;
+    case BM01:
+      if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM02:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM03:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM04:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM05:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER)); SEND_STRING(SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM06:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM07:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM08:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM09:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM10:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM11:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM12:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM13:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM14:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM15:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM16:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
+      } else {
+
+      }
+      break;  
+    case BM17:
+      if (record->event.pressed) {
+        SEND_STRING(SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_F6) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_DOWN) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_LSFT) SS_TAP(X_ENTER));
       } else {
 
       }
