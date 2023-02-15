@@ -16,6 +16,8 @@ SUBS(rightparen,              SS_LSFT("9"),        SG_9,  SG_0)
 																		// 9 0 for )
 SUBS(pipes,              SS_DOWN(X_LSFT) SS_TAP(X_INT3) SS_UP(X_LSFT),        SG_0,  SG_MINS)
 																		// 0 - for |
+SUBS(bold,              SS_DOWN(X_LCTL) SS_TAP(X_B) SS_UP(X_LCTL),        SG_S,  SG_D, SG_F)
+																		// sdf - for ctrl b																		
 COMB(yen,              KC_INT3,        SG_MINS,  SG_TILD)
 																		// 0 - for |
 //COMB(emdash, 		UC(0x2014), SG_K, SG_J)
@@ -65,6 +67,6 @@ SUBS(copier,                    SS_DOWN(X_LCTL) SS_TAP(X_C) SS_UP(X_LCTL),   Q_Z
 SUBS(paster,                    SS_DOWN(X_LCTL) SS_TAP(X_V) SS_UP(X_LCTL),   SG_X, SG_V)
 																		// XV to Paste
 
-SUBS(cdset, "cd /" SS_TAP(X_QUOT) "/Users/Main/Documents/GitHub/qmk"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"firmware"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"bluetooth"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"scrubtest", SG_C,SG_D,SG_SPC1)
+SUBS(cdset, "cd c:/" SS_TAP(X_QUOT) "/Users/Main/Documents/GitHub/qmk"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"firmware"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"bluetooth"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"scrubtest", SG_C,SG_D,SG_SPC1)
 
 SUBS(q8compset, "qmk compile -kb keychron/q8/ansi"SS_DOWN(X_LSFT) SS_TAP(X_INT1) SS_UP(X_LSFT)"encoder -km sagiteya", SG_Q,SG_8,SG_SPC1)

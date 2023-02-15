@@ -146,7 +146,7 @@ void a_finished (qk_tap_dance_state_t *state, void *user_data) {
     case SINGLE_TAP: register_code(KC_A); break;
     case SINGLE_HOLD: register_code(KC_LALT); break;
     case DOUBLE_TAP: register_code(KC_A);unregister_code(KC_A);register_code(KC_A); break;
-    case DOUBLE_HOLD: register_code(KC_LCTL);register_code(KC_A);unregister_code(KC_A); break;
+    case DOUBLE_HOLD: register_code(KC_LCTL);register_code(KC_END);unregister_code(KC_END);register_code(KC_LSFT);register_code(KC_HOME);unregister_code(KC_HOME);unregister_code(KC_LSFT); break;
     case DOUBLE_SINGLE_TAP: register_code(KC_A);unregister_code(KC_A);register_code(KC_A); break;
   }    
 }
@@ -335,7 +335,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [CT_Q_HOME] = ACTION_TAP_DANCE_TAP_HOLD(KC_Q, KC_HOME),
     [CT_W_END] = ACTION_TAP_DANCE_TAP_HOLD(KC_W, KC_END),
     [CT_K_APOS] = ACTION_TAP_DANCE_TAP_HOLD(KC_K, S(KC_7)),
-    [CT_B_UNDER] = ACTION_TAP_DANCE_TAP_HOLD(KC_B, C(KC_Z)),
+    [CT_B_UNDER] = ACTION_TAP_DANCE_TAP_HOLD(KC_B, C(KC_B)),
 //    [CT_CTRL_CSTAB] = ACTION_TAP_DANCE_TAP_HOLD(S(C(KC_TAB)), KC_LCTL),
     [CT_X_CUT] = ACTION_TAP_DANCE_TAP_HOLD(KC_X, C(KC_X)),
     [CT_C_COPY] = ACTION_TAP_DANCE_TAP_HOLD(KC_C, C(KC_C)),
