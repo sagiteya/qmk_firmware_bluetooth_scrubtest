@@ -18,6 +18,16 @@ SUBS(pipes,              SS_DOWN(X_LSFT) SS_TAP(X_INT3) SS_UP(X_LSFT),        SG
 																		// 0 - for |
 SUBS(bold,              SS_DOWN(X_LCTL) SS_TAP(X_B) SS_UP(X_LCTL),        SG_S,  SG_D, SG_F)
 																		// sdf - for ctrl b																		
+SUBS(apostrophes,               SS_LSFT("7"),        SG_K,  KC_U)
+																		// K U for ' 
+SUBS(apostrophes2,               SS_LSFT("7"),        SG_K,  SG_J)
+																		// K J for ' 
+
+SUBS(quotesK,               SS_LSFT("2"),        SG_W,  KC_K)
+																		// K W for ' 
+SUBS(quotesD,               SS_LSFT("2"),        SG_W,  SG_D)
+																		// D W for ' 
+
 COMB(yen,              KC_INT3,        SG_MINS,  SG_TILD)
 																		// 0 - for |
 //COMB(emdash, 		UC(0x2014), SG_K, SG_J)
