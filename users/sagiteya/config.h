@@ -27,7 +27,7 @@
 #    define TAPPING_TOGGLE 2
 #    define ONESHOT_TAP_TOGGLE 2
 
-#    define TAPPING_TERM 175
+#    define TAPPING_TERM 185
 #    define TAPPING_TERM_PER_KEY
 
 #    define COMBO_ONLY_FROM_LAYER 0
